@@ -19,7 +19,5 @@ public class Rol {
     @Id
     @GeneratedValue(strategy = IDENTITY )
     private Long id_rol;
-    private String desc_rol;
-    private String permisos_rol;
-
+    private String name;
 }

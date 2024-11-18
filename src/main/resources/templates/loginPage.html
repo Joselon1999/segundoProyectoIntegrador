@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Employee</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+</head>
+<body>
+<div class="container my-2" align="center">
+
+    <h3>Listado de postulantes</h3>
+    <table style="width:90%" border="1"
+           class = "table table-striped table-responsive-md">
+        <thead>
+        <tr>
+            <th>Nro</th>
+            <th>Email</th>
+            <th>Datos personales</th>
+            <th>Estudios profesionales</th>
+            <th>Experiencia laboral</th>
+            <th>Estado</th>
+            <th>Opciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user:${allUserlist}">
+            <td th:text="${user.userId}"></td>
+            <td th:text="${user.email}"></td>
+            <td><a th:href="@{/admin/personal/{userId}(userId=${user.userId})}"
+                   class="btn btn-secondary" style="color:white">Ver</a></td>
+            <td><a th:href="@{/admin/estudio/{email}(email=${user.email})}"
+                   class="btn btn-secondary" style="color:white">Ver</a></td>
+            <td><a th:href="@{/admin/experiencia/{email}(email=${user.email})}"
+                   class="btn btn-secondary" style="color:white">Ver</a></td>
+            <td th:text="${user.status}"></td>
+            <td><a th:href="@{/admin/aprobar/{email}(email=${user.email})}"
+                   class="btn btn-primary" style="color:white">Aprobar</a>
+                <a th:href="@{/admin/rechazar/{email}(email=${user.email})}"
+                   class="btn btn-danger" style="color:white">Rechazar</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div style="height: 100px; "></div>
+<div class="container my-2" align="center">
+
+    <h3>Listado de Puestos de Trabajo</h3>
+    <!--<a th:href="@{/admin/rechazar/{email}(email=${user.email})}"
+       class="btn btn-danger" style="color:white">Crear Puesto de Trabajo</a>-->
+    <table style="width:90%" border="1"
+           class = "table table-striped table-responsive-md">
+        <thead>
+        <tr>
+            <th>Nro</th>
+            <th>Descripcion</th>
+            <th>Estado</th>
+            <th>Opciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="puesto:${allPuestolist}">
+            <td th:text="${puesto.id}"></td>
+            <td th:text="${puesto.descripcion}"></td>
+            <td th:text="${puesto.estado}"></td>
+            <td><a th:href="@{/admin/puestoTrabajo/get/{id}(id=${puesto.id})}"
+                   class="btn btn-primary" style="color:white">Modificar</a>
+                <a th:href="@{/admin/puestoTrabajo/results/{id}(id=${puesto.id})}"
+                   class="btn btn-danger" style="color:white">Evaluar</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div>
+    <a th:href="@{/users/export/pdf}"
+       class="btn btn-primary" style="color:white; align center">Export users to PDF</a>
+</div>
+</body>
+</html>

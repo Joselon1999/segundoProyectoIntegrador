@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Banco de Alimentos Perú</title>
+  <link href="../static/css/index.css" th:href="@{/css/index.css}"  type="text/css"  rel="stylesheet">
+</head>
+<body>
+<header>
+  <nav>
+    <div>
+      <img th:src="@{/imagenes/logo.png}"  width="50%" height="auto"/>
+    </div>
+    <ul>
+      <li><a href="#">NOSOTROS</a></li>
+      <li><a href="#">PORTAL DE TRANSPARENCIA</a></li>
+      <li><a href="#">CONTACTO</a></li>
+      <li><a th:href="@{/login}" style="background-color: #fdd835; padding: 10px 15px; border-radius: 5px;">INICIAR SESIÓN</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="hero">
+  <img th:src="@{/imagenes/slide.png}"  width="50%" height="auto"/>
+</section>
+
+<section class="section section-green">
+  <table style="width:100%">
+    <tr>
+      <td style="width:50%">
+        <h2>Banco de Alimentos Perú</h2>
+        <p>Somos una organización sin fines de lucro que desde el 2014 lucha contra el hambre y el desperdicio de alimentos en Perú. Recuperamos alimentos y implementamos proyectos de alto impacto en las comunidades para romper el ciclo de la pobreza y la inseguridad alimentaria.</p>
+        <button style="background-color: #fdd835; border: none; padding: 10px 20px; color: black; border-radius: 5px;">CONOCE MÁS</button>
+      </td>
+      <td style="width:50%">
+        <img th:src="@{/imagenes/Rectangle3.png}"  width="50%" height="auto"/>
+      </td>
+    </tr>
+  </table>
+</section>
+
+<section class="section section-yellow">
+  <table style="width:100%">
+    <tr>
+      <td style="width:33%">
+        <img th:src="@{/imagenes/Rectangle5.png}"  width="auto" height="100%"/>
+        <h3>Rescate de Alimentos</h3>
+        <p>En industria, agroindustrias, supermercados, restaurantes, hoteles, mercados de abasto, entre otros.</p>
+      </td>
+      <td style="width:34%">
+        <img th:src="@{/imagenes/Rectangle6.png}"  width="50%" height="auto"/>
+        <h3>Proyectos de alto impacto</h3>
+        <p>Diseño e implementación de programas de alto impacto sociales y medioambientales en conjunto con nuestros aliados.</p>
+      </td>
+      <td style="width:33%">
+        <img th:src="@{/imagenes/Rectangle7.png}"  width="50%" height="auto"/>
+        <h3>Respuesta a emergencias</h3>
+        <p>Respuesta inmediata en situaciones de emergencias a través de alimentos y productos.</p>
+      </td>
+    </tr>
+  </table>
+</section>
+
+<footer>
+  <div class="footer-contact">
+  <table style="width:100%">
+    <tr>
+      <td style="width:33%">
+        <img th:src="@{/imagenes/Logo.png}"  width="50%" height="auto"/>
+      </td>
+      <td style="width:34%">
+        <div>
+          <h4>NOSOTROS</h4>
+          <h4>PORTAL DE TRANSPARENCIA</h4>
+          <h4>CONTACTO</h4>
+        </div>
+      </td>
+      <td style="width:33%">
+        <div>
+          <h4>CONTÁCTANOS</h4>
+          <p>contacto@bancodealimentosperu.org</p>
+          <p>Redes sociales: <span>Íconos de redes</span></p>
+        </div>
+      </td>
+    </tr>
+    <tr></tr>
+    <tr>
+      <p style="text-align: center;">Banco de Alimentos Perú. Todos los Derechos Reservados © 2024 — <a href="#">Política de Privacidad</a></p>
+    </tr>
+  </table>
+  </div>
+
+</footer>
+</body>
+</html>
