@@ -35,7 +35,7 @@ public class SecurityConfig {
                         .permitAll()
                         .defaultSuccessUrl("/dashboard", true)
                         .failureUrl("/login?error=true")
-                        .usernameParameter("username")
+                        .usernameParameter("email")
                         .passwordParameter("password")
                 )
                 .logout(logout -> logout

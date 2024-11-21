@@ -10,4 +10,6 @@ public interface UserService {
 
     Usuario getUsuario(String email);
     Page<Usuario> listUsuario(int pagina, int tamanio);
+
+    Usuario createUser(Usuario usuario);
 }
