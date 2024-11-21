@@ -42,6 +42,6 @@ public class ProductController {
     @PostMapping("/alimentos/nuevo")
     public String saveEstudio(Model model,@ModelAttribute("alimento") Producto producto) {
         productService.createProducto(producto);
-        return "redirect:/gestion-productos";
+        return "redirect:/admin/gestion-productos";
     }
 }

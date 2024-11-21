@@ -25,15 +25,15 @@ public class SecurityConfig {
                 .csrf().disable()
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/helper/**").hasAnyRole("HELPER", "ADMIN")
-                        .requestMatchers("/login","/dashboard/**","/h2-console").permitAll()
+                        .requestMatchers("/helper/**","/dashboard/**").hasAnyRole("HELPER", "ADMIN")
+                        .requestMatchers("/login","/h2-console").permitAll()
                         .anyRequest().permitAll()
                 )
                 .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
                 .formLogin(form -> form
                         .loginPage("/login")
                         .permitAll()
-                        .defaultSuccessUrl("/admin/dashboard", true)
+                        .defaultSuccessUrl("/dashboard", true)
                         .failureUrl("/login?error=true")
                         .usernameParameter("username")
                         .passwordParameter("password")

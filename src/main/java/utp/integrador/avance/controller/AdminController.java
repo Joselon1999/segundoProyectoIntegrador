@@ -6,7 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping(value = "/admin")
+@RequestMapping(value = "")
 public class AdminController {
 
     @GetMapping("/dashboard")
