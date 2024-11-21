@@ -19,6 +19,7 @@
     <div class="mb-3">
       <label for="cantidad" class="form-label">Cantidad</label>
       <input type="number" class="form-control" id="cantidad" name="cantidad" th:field="*{cant_producto}" placeholder="Ingresa la cantidad" required>
+      <div class="text-danger" th:if="${#fields.hasErrors('cant_producto')}" th:errors="*{cant_producto}"></div>
     </div>
 
     <!-- Campo de Donante -->

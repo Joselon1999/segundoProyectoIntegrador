@@ -1,10 +1,10 @@
 package utp.integrador.avance.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Positive;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.time.LocalDate;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
@@ -22,7 +22,8 @@ public class Producto {
 
     private String desc_producto;
 
-    private int cant_producto;
+    @Positive(message = "La cantidad debe ser un número positivo")
+    private Double cant_producto;
 
     private LocalDate fecha_ingreso;
 

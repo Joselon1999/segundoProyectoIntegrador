@@ -1,17 +1,14 @@
 package utp.integrador.avance.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import utp.integrador.avance.model.Donador;
 import utp.integrador.avance.model.Producto;
-import utp.integrador.avance.model.Usuario;
 import utp.integrador.avance.service.ProductService;
-import utp.integrador.avance.service.UserService;
-
-import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -40,7 +37,12 @@ public class ProductController {
     }
 
     @PostMapping("/alimentos/nuevo")
-    public String saveEstudio(Model model,@ModelAttribute("alimento") Producto producto) {
+    public String saveEstudio(@Valid @ModelAttribute("alimento") Producto producto,
+                              BindingResult bindingResult,
+                              Model model) {
+        if (bindingResult.hasErrors()) {
+            return "createProducto";
+        }
         productService.createProducto(producto);
         return "redirect:/admin/gestion-productos";
     }
