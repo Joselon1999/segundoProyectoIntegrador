@@ -15,7 +15,7 @@
       <h1>Alimentos</h1>
       <p class="text-muted">Ordenado por fecha de vencimiento más reciente</p>
     </div>
-    <button class="btn btn-register">Registrar nuevo ingreso</button>
+    <button class="btn btn-register"><a th:href="@{/gestion-productos/alimentos/nuevo}">Registrar nuevo ingreso</a></button>
   </div>
 
   <!-- Lista de alimentos -->
@@ -26,9 +26,13 @@
         <div>
           <h5 th:text="${alimento.desc_producto}">Nombre del Alimento</h5>
           <p class="mb-1 text-muted" th:text="'Cantidad: '+ ${alimento.cant_producto}">
-            Breve descripción del alimento.
+            Cantidad desconocida.
           </p>
           <button class="btn btn-dark btn-sm" th:onclick="'/detalle-alimento/' + ${alimento.id_producto}">Ver más</button>
+        </div>
+        <div style="margin-left: auto; margin-right: 0;">
+          <p style="text-align: right"
+             class="mb-1 text-muted" th:text="'Fecha Vencimiento: '+ ${alimento.fechaVencimiento}">
         </div>
       </div>
     </div>

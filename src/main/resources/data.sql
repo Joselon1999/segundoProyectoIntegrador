@@ -21,3 +21,7 @@ VALUES
 (90,'Bolsa de Arroz de 1kg','Activo','2024-11-01','2024-12-10',1),
 (110,'Lata de durazno','Activo','2024-11-01','2024-12-11',1),
 (50,'Bolsa de lentejas de 1kg','Activo','2024-11-01','2024-12-12',1);
+
+INSERT INTO DONADOR (nombre)
+VALUES
+    ('Tio Alberto');

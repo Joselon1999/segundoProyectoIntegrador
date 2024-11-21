@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Registro de Alimentos</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
+  <link href="../static/css/create.css" th:href="@{/css/create.css}"  type="text/css"  rel="stylesheet">
+</head>
+<body>
+<div class="form-container">
+  <form action="#" th:action="@{/gestion-productos/alimentos/nuevo}" th:object="${alimento}" method="POST">
+    <!-- Campo de Descripción -->
+    <div class="mb-3">
+      <label for="descripcion" class="form-label">Descripción</label>
+      <input type="text" class="form-control" id="descripcion" name="descripcion" th:field="*{desc_producto}" placeholder="Ingresa la descripción" required>
+    </div>
+
+    <!-- Campo de Cantidad -->
+    <div class="mb-3">
+      <label for="cantidad" class="form-label">Cantidad</label>
+      <input type="number" class="form-control" id="cantidad" name="cantidad" th:field="*{cant_producto}" placeholder="Ingresa la cantidad" required>
+    </div>
+
+    <!-- Campo de Donante -->
+    <!--<div class="mb-3">
+      <label for="donante" class="form-label">Donante</label>
+      <select class="form-select" id="donante" name="donante" th:field="*{donante}" required>
+        <option value="" disabled selected>Selecciona un donante</option>
+        <option th:each="donante : ${donantes}" th:value="${donante}" th:text="${donante}"></option>
+      </select>
+    </div>-->
+
+    <!-- Campo de Fecha de Vencimiento -->
+    <div class="mb-3">
+      <label for="fechaVencimiento" class="form-label">Fecha de Vencimiento</label>
+      <input type="date" class="form-control" id="fechaVencimiento" name="fechaVencimiento" th:field="*{fechaVencimiento}" required>
+    </div>
+
+    <!-- Botones -->
+    <div class="d-flex justify-content-between">
+      <button type="submit" class="btn btn-guardar">Guardar</button>
+      <a href="/gestion-productos" class="btn btn-cancelar">Cancelar</a>
+    </div>
+  </form>
+</div>
+</body>
+</html>

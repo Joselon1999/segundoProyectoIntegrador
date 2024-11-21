@@ -6,4 +6,6 @@ import utp.integrador.avance.model.Producto;
 public interface ProductService {
 
     Page<Producto> listProductos(int pagina, int tamanio);
+
+    Producto createProducto(Producto producto);
 }

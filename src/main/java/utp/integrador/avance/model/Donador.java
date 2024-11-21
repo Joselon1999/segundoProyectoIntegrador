@@ -20,4 +20,6 @@ public class Donador {
     @Id
     @GeneratedValue(strategy = IDENTITY )
     private Long id_donador;
+
+    private String nombre;
 }

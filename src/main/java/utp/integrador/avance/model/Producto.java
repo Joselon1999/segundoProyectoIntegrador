@@ -26,9 +26,13 @@ public class Producto {
 
     private LocalDate fecha_ingreso;
 
-    private LocalDate fecha_vencimiento;
+    @Column(name = "fecha_vencimiento")
+    private LocalDate fechaVencimiento;
 
     private String estado_producto;
+
+    @ManyToOne
+    private Donador donador;
 
     @ManyToOne
     private Usuario usuario;
