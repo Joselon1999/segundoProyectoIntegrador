@@ -74,16 +74,16 @@ public class SecurityConfig {
         return http
                 .csrf().disable()
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/admin").hasRole("ADMIN")
-                        .requestMatchers("/helper").hasAnyRole("HELPER", "ADMIN")
-                        .requestMatchers("/dashboard","/h2-console").permitAll()
+                        .requestMatchers("/admin/**").permitAll()//.hasRole("ADMIN")
+                        .requestMatchers("/helper/**").hasAnyRole("HELPER", "ADMIN")
+                        .requestMatchers("/dashboard/**","/h2-console").permitAll()
                         .anyRequest().permitAll()
                 )
                 .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
                 .formLogin(form -> form
                         .loginPage("/login")
                         .permitAll()
-                        .defaultSuccessUrl("/dashboard", true)
+                        .defaultSuccessUrl("/admin/dashboard", true)
                         .failureUrl("/login?error=true")
                         .usernameParameter("username")
                         .passwordParameter("password")

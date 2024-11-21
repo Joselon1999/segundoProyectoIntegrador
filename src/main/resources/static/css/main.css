@@ -1,0 +1,15 @@
+.food-item img {
+    max-height: 100px;
+    width: auto;
+}
+.btn-register {
+    background-color: #ffc107;
+    color: #000;
+    border: none;
+}
+.btn-register:hover {
+    background-color: #e0a800;
+}
+.pagination {
+    justify-content: center;
+}
