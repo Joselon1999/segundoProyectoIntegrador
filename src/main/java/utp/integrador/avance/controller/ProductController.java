@@ -12,14 +12,13 @@ import utp.integrador.avance.service.ProductService;
 import java.util.List;
 
 @Controller
-@RequestMapping("/admin/gestion-productos")
 public class ProductController {
 
 
     @Autowired
     private ProductService productService;
 
-    @GetMapping()
+    @GetMapping("/helper/gestion-productos")
     public String gestionProductos(@RequestParam(defaultValue = "1") int pagina,
                                   @RequestParam(defaultValue = "5") int tamanio,
                                   Model model) {
@@ -29,14 +28,14 @@ public class ProductController {
         model.addAttribute("totalPaginas", list.getTotalPages());
         return "mainProductos";
     }
-    @GetMapping("/alimentos/nuevo")
+    @GetMapping("/admin/gestion-productos/alimentos/nuevo")
     public String mostrarFormulario(Model model) {
         model.addAttribute("alimento", new Producto());
         model.addAttribute("donantes", List.of("Donante 1", "Donante 2", "Donante 3"));
         return "createProducto";
     }
 
-    @PostMapping("/alimentos/nuevo")
+    @PostMapping("/admin/gestion-productos/alimentos/nuevo")
     public String saveEstudio(@Valid @ModelAttribute("alimento") Producto producto,
                               BindingResult bindingResult,
                               Model model) {
@@ -44,6 +43,6 @@ public class ProductController {
             return "createProducto";
         }
         productService.createProducto(producto);
-        return "redirect:/admin/gestion-productos";
+        return "redirect:/helper/gestion-productos";
     }
 }
