@@ -33,6 +33,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Usuario createUser(Usuario usuario) {
+        usuario.setUsername(usuario.getEmail());
         usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
         return userRepository.save(usuario);
     }
