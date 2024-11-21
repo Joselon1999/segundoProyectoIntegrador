@@ -26,7 +26,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/gestion-usuarios")
+    @GetMapping("/admin/gestion-usuarios")
     public String gestionUsuarios(@RequestParam(defaultValue = "1") int pagina,
                                   @RequestParam(defaultValue = "5") int tamanio,
                                   Model model) {

@@ -15,7 +15,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Controller
-@RequestMapping("/gestion-productos")
+@RequestMapping("/admin/gestion-productos")
 public class ProductController {
 
 
