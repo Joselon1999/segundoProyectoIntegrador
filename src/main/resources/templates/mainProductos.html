@@ -18,7 +18,7 @@
     <button class="btn btn-register"><a th:href="@{/admin/gestion-productos/alimentos/nuevo}">Registrar nuevo ingreso</a></button>
   </div>
   <div class="mb-4">
-    <form th:action="@{/admin/gestion-productos}" method="get" class="d-flex align-items-center">
+    <form th:action="@{/helper/gestion-productos}" method="get" class="d-flex align-items-center">
       <label for="categoria" class="form-label me-2">Filtrar por categoría:</label>
       <select id="categoria" name="categoria" class="form-select me-2">
         <option value="" th:selected="${#lists.isEmpty(param.categoria)}">Todas las categorías</option>
