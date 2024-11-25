@@ -1,9 +1,6 @@
 package utp.integrador.avance.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,7 +18,10 @@ public class Categoria {
 
     @Id
     @GeneratedValue(strategy = IDENTITY )
-    private Long id_categoria;
+    private Long id;
 
-    private String nom_categoria;
+    @Column(name = "nom_categoria")
+    private String nombre;
+
+    private boolean estado;
 }

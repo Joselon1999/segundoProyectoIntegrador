@@ -8,4 +8,6 @@ public interface ProductService {
     Page<Producto> listProductos(int pagina, int tamanio);
 
     Producto createProducto(Producto producto);
+
+    Page<Producto> listarPorCategoria(Long categoria,int pagina, int tamanio);
 }

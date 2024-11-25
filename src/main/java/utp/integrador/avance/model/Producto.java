@@ -37,4 +37,7 @@ public class Producto {
 
     @ManyToOne
     private Usuario usuario;
+
+    @ManyToOne
+    private Categoria categoria;
 }

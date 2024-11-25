@@ -42,4 +42,10 @@ public class ProductServiceImpl implements ProductService {
         producto.setFecha_ingreso(LocalDate.now());
         return productRepository.save(producto);
     }
+
+    @Override
+    public Page<Producto> listarPorCategoria(Long categoria, int pagina, int tamanio) {
+        return productRepository.findByCategoriaIdOrderByFechaVencimientoAsc(
+                categoria,PageRequest.of(pagina-1,tamanio));
+    }
 }
