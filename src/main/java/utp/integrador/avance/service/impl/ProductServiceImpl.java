@@ -32,7 +32,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Page<Producto> listProductos(int pagina, int tamanio) {
-        return productRepository.findAllByOrderByFechaVencimientoAsc(PageRequest.of(pagina-1,tamanio));
+        return productRepository.findProductosConStock(0.0,PageRequest.of(pagina-1,tamanio));
     }
 
     @Override
@@ -49,8 +49,8 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Page<Producto> listarPorCategoria(Long categoria, int pagina, int tamanio) {
-        return productRepository.findByCategoriaIdOrderByFechaVencimientoAsc(
-                categoria,PageRequest.of(pagina-1,tamanio));
+        return productRepository.findProductosSinStock(
+                categoria,0.0,PageRequest.of(pagina-1,tamanio));
     }
 
     @Override
@@ -65,7 +65,7 @@ public class ProductServiceImpl implements ProductService {
 
         if (producto.isPresent()) {
             p = producto.get();
-            p.setCant_producto(p.getCant_producto() - request.getCantidad());
+            p.setCantidad(p.getCantidad() - request.getCantidad());
             productRepository.save(p);
         } else {
             log.warn("Request modificado: {} - {}",request.getProductId(),request.getCantidad());

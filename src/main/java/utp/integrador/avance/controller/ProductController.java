@@ -89,7 +89,7 @@ public class ProductController {
         Producto producto = productService.getProducto(request.getProductId())
                 .orElseThrow(() -> new IllegalArgumentException("Producto no encontrado"));
 
-        if (request.getCantidad() > producto.getCant_producto()) {
+        if (request.getCantidad() > producto.getCantidad()) {
             model.addAttribute("product", productService.getProducto(request.getProductId()));
             model.addAttribute("request", request);
             model.addAttribute("mensaje", "La cantidad solicitada supera el stock disponible.");

@@ -2,6 +2,7 @@ package utp.integrador.avance.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,8 +23,8 @@ public class Producto {
 
     private String desc_producto;
 
-    @Positive(message = "La cantidad debe ser un número positivo")
-    private Double cant_producto;
+    @PositiveOrZero(message = "La cantidad debe ser un número positivo")
+    private Double cantidad;
 
     private LocalDate fecha_ingreso;
 

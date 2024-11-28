@@ -37,7 +37,7 @@
         <img th:src="@{/imagenes/alimento.png}"  alt="Imagen del alimento" class="me-3"/>
         <div>
           <h5 th:text="${alimento.desc_producto}">Nombre del Alimento</h5>
-          <p class="mb-1 text-muted" th:text="'Cantidad: '+ ${alimento.cant_producto}">
+          <p class="mb-1 text-muted" th:text="'Cantidad: '+ ${alimento.cantidad}">
             Cantidad desconocida.
           </p>
           <button class="btn btn-register"><a th:href="@{/helper/gestion-productos/{id}/usar(id = ${alimento.id_producto})}">Usar</a></button>
