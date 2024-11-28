@@ -1,7 +1,10 @@
 package utp.integrador.avance.service;
 
 import org.springframework.data.domain.Page;
+import utp.integrador.avance.dto.UseProductRequest;
 import utp.integrador.avance.model.Producto;
+
+import java.util.Optional;
 
 public interface ProductService {
 
@@ -10,4 +13,8 @@ public interface ProductService {
     Producto createProducto(Producto producto);
 
     Page<Producto> listarPorCategoria(Long categoria,int pagina, int tamanio);
+
+    Optional<Producto> getProducto(Long id);
+
+    Producto actualizarProducto(UseProductRequest request);
 }

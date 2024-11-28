@@ -1,5 +1,6 @@
 package utp.integrador.avance.service.impl;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -7,14 +8,17 @@ import org.springframework.stereotype.Service;
 import utp.integrador.avance.dao.DonanteRepository;
 import utp.integrador.avance.dao.ProductRepository;
 import utp.integrador.avance.dao.UserRepository;
+import utp.integrador.avance.dto.UseProductRequest;
 import utp.integrador.avance.model.Donador;
 import utp.integrador.avance.model.Producto;
 import utp.integrador.avance.model.Usuario;
 import utp.integrador.avance.service.ProductService;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 @Service
+@Slf4j
 public class ProductServiceImpl implements ProductService {
 
     @Autowired
@@ -47,5 +51,25 @@ public class ProductServiceImpl implements ProductService {
     public Page<Producto> listarPorCategoria(Long categoria, int pagina, int tamanio) {
         return productRepository.findByCategoriaIdOrderByFechaVencimientoAsc(
                 categoria,PageRequest.of(pagina-1,tamanio));
+    }
+
+    @Override
+    public Optional<Producto> getProducto(Long id) {
+        return productRepository.findById(id);
+    }
+
+    @Override
+    public Producto actualizarProducto(UseProductRequest request) {
+        Optional<Producto> producto = productRepository.findById(request.getProductId());
+        Producto p = new Producto();
+
+        if (producto.isPresent()) {
+            p = producto.get();
+            p.setCant_producto(p.getCant_producto() - request.getCantidad());
+            productRepository.save(p);
+        } else {
+            log.warn("Request modificado: {} - {}",request.getProductId(),request.getCantidad());
+        }
+        return p;
     }
 }

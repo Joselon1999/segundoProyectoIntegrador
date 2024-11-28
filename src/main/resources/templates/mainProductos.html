@@ -40,7 +40,7 @@
           <p class="mb-1 text-muted" th:text="'Cantidad: '+ ${alimento.cant_producto}">
             Cantidad desconocida.
           </p>
-          <button class="btn btn-dark btn-sm" th:onclick="'/detalle-alimento/' + ${alimento.id_producto}">Ver más</button>
+          <button class="btn btn-register"><a th:href="@{/helper/gestion-productos/{id}/usar(id = ${alimento.id_producto})}">Usar</a></button>
         </div>
         <div style="margin-left: auto; margin-right: 0;">
           <p style="text-align: right"
