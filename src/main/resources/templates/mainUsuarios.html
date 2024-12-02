@@ -24,7 +24,9 @@
       <div class="d-flex align-items-center">
         <div>
           <h5 th:text="${usuario.username}">Nombre del Alimento</h5>
-
+          <button class="btn btn-update">
+            <a class="a-update" th:href="@{/admin/gestion-usuarios/{id}/actualizar(id = ${usuario.email})}">Usar</a>
+          </button>
         </div>
       </div>
     </div>

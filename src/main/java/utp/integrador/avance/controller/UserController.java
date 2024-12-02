@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import utp.integrador.avance.dto.UseProductRequest;
+import utp.integrador.avance.dto.UseUserRequest;
 import utp.integrador.avance.model.Producto;
 import utp.integrador.avance.model.Usuario;
 import utp.integrador.avance.service.RolService;
@@ -58,6 +60,31 @@ public class UserController {
             return "createUsuario";
         }
         userService.createUser(usuario);
+        return "redirect:/admin/gestion-usuarios";
+    }
+
+    @GetMapping("/{id}/actualizar")
+    public String usarUsuario(@PathVariable String id,Model model) {
+        UseUserRequest request = new UseUserRequest();
+        request.setEmail(id);
+
+        model.addAttribute("usuario", userService.getUsuario(id));
+        model.addAttribute("request", request);
+        return "updateUsuario";
+    }
+
+    @PostMapping("/actualizar")
+    public String registrarUsoUsuario(@ModelAttribute("request") UseUserRequest request,
+                                       Model model) {
+        Usuario usuario = userService.getUsuario(request.getEmail())
+                .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado"));
+
+        if (request.getPassword().isEmpty()) {
+            model.addAttribute("usuario", userService.getUsuario(request.getEmail()));
+            model.addAttribute("request", request);
+            return "updateUsuario";
+        }
+        userService.updateUser(request);
         return "redirect:/admin/gestion-usuarios";
     }
 }
