@@ -16,4 +16,6 @@ public interface UserService {
     Usuario createUser(Usuario usuario);
 
     Usuario updateUser(UseUserRequest request);
+
+    Usuario updateUser(Usuario usuario);
 }
