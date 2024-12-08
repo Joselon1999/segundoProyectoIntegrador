@@ -7,20 +7,24 @@
   <link href="../static/css/create.css" th:href="@{/css/create.css}"  type="text/css"  rel="stylesheet">
 </head>
 <body>
-<h1>Comprar Producto</h1>
-<form th:action="@{/helper/gestion-productos/usar}" th:object="${request}" method="post">
-  <input type="hidden" th:field="*{productId}"/>
-  <div>
-    <label for="cantidad">Cantidad:</label>
-    <input type="number" id="cantidad" name="cantidad" min="1" required>
+<div class="centered-container">
+  <div class="form-container">
+    <h1>Comprar Producto</h1>
+    <form th:action="@{/helper/gestion-productos/usar}" th:object="${request}" method="post">
+      <input type="hidden" th:field="*{productId}"/>
+      <div>
+        <label for="cantidad">Cantidad:</label>
+        <input type="number" id="cantidad" name="cantidad" min="1" required>
+      </div>
+      <div th:if="${#fields.hasErrors('cantidad')}" style="color: red;">
+        <p th:errors="*{cantidad}">La cantidad no es válida.</p>
+      </div>
+      <button type="submit">Guardar</button>
+    </form>
+    <div th:if="${mensaje}" style="color: red;">
+      <p th:text="${mensaje}"></p>
+    </div>
   </div>
-  <div th:if="${#fields.hasErrors('cantidad')}" style="color: red;">
-    <p th:errors="*{cantidad}">La cantidad no es válida.</p>
-  </div>
-  <button type="submit">Guardar</button>
-</form>
-<div th:if="${mensaje}" style="color: red;">
-  <p th:text="${mensaje}"></p>
 </div>
 </body>
 </html>

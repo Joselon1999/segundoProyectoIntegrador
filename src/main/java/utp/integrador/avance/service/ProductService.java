@@ -16,5 +16,7 @@ public interface ProductService {
 
     Optional<Producto> getProducto(Long id);
 
+    Producto usarProducto(UseProductRequest request);
+
     Producto actualizarProducto(UseProductRequest request);
 }

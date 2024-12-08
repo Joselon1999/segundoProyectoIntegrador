@@ -59,13 +59,28 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Producto actualizarProducto(UseProductRequest request) {
+    public Producto usarProducto(UseProductRequest request) {
         Optional<Producto> producto = productRepository.findById(request.getProductId());
         Producto p = new Producto();
 
         if (producto.isPresent()) {
             p = producto.get();
             p.setCantidad(p.getCantidad() - request.getCantidad());
+            productRepository.save(p);
+        } else {
+            log.warn("Request modificado: {} - {}",request.getProductId(),request.getCantidad());
+        }
+        return p;
+    }
+
+    @Override
+    public Producto actualizarProducto(UseProductRequest request) {
+        Optional<Producto> producto = productRepository.findById(request.getProductId());
+        Producto p = new Producto();
+
+        if (producto.isPresent()) {
+            p = producto.get();
+            p.setCantidad((double) request.getCantidad());
             productRepository.save(p);
         } else {
             log.warn("Request modificado: {} - {}",request.getProductId(),request.getCantidad());

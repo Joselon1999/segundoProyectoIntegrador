@@ -95,6 +95,28 @@ public class ProductController {
             model.addAttribute("mensaje", "La cantidad solicitada supera el stock disponible.");
             return "usarProducto";
         }
+        productService.usarProducto(request);
+        return "redirect:/helper/gestion-productos";
+    }
+
+
+    @GetMapping("/admin/gestion-productos/{id}/modificar")
+    public String actualizarProducto(@PathVariable Long id,Model model) {
+        UseProductRequest request = new UseProductRequest();
+        request.setProductId(id);
+
+        model.addAttribute("product", productService.getProducto(id));
+        model.addAttribute("request", request);
+        return "updateProducto";
+    }
+
+    @PostMapping("/admin/gestion-productos/modificar")
+    public String registrarActualizarProductoProducto(@ModelAttribute("request") UseProductRequest request,
+                                       BindingResult bindingResult,
+                                       Model model) {
+        Producto producto = productService.getProducto(request.getProductId())
+                .orElseThrow(() -> new IllegalArgumentException("Producto no encontrado"));
+
         productService.actualizarProducto(request);
         return "redirect:/helper/gestion-productos";
     }
