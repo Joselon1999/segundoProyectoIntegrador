@@ -102,10 +102,12 @@ public class ProductController {
 
     @GetMapping("/admin/gestion-productos/{id}/modificar")
     public String actualizarProducto(@PathVariable Long id,Model model) {
+        Producto producto = productService.getProducto(id).get();
         UseProductRequest request = new UseProductRequest();
         request.setProductId(id);
+        request.setFechaVencimiento(producto.getFechaVencimiento());
 
-        model.addAttribute("product", productService.getProducto(id));
+        model.addAttribute("product", producto);
         model.addAttribute("request", request);
         return "updateProducto";
     }

@@ -14,11 +14,19 @@
             <input type="hidden" th:field="*{productId}"/>
             <div class="mb-3">
                 <label for="cantidad" class="form-label">Cantidad:</label>
-                <input type="number" id="cantidad" name="cantidad" class="form-control" min="1" required>
+                <input type="number" id="cantidad" name="cantidad" class="form-control"
+                       th:field="*{cantidad}" th:value="${request.cantidad}" min="1" required>
             </div>
             <div th:if="${#fields.hasErrors('cantidad')}" style="color: red;">
                 <p th:errors="*{cantidad}">La cantidad no es válida.</p>
             </div>
+
+            <div class="mb-3">
+                <label for="fechaVencimiento" class="form-label">Fecha de Vencimiento:</label>
+                <input type="date" id="fechaVencimiento" name="fechaVencimiento" class="form-control"
+                       th:field="*{fechaVencimiento}" th:value="${request.fechaVencimiento}" required>
+            </div>
+
             <div class="text-center">
                 <button type="submit" class="btn btn-primary">Guardar</button>
             </div>

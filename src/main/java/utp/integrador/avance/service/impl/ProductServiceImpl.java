@@ -81,6 +81,7 @@ public class ProductServiceImpl implements ProductService {
         if (producto.isPresent()) {
             p = producto.get();
             p.setCantidad((double) request.getCantidad());
+            p.setFechaVencimiento(request.getFechaVencimiento());
             productRepository.save(p);
         } else {
             log.warn("Request modificado: {} - {}",request.getProductId(),request.getCantidad());
