@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import utp.integrador.avance.dao.TokenRepository;
 import utp.integrador.avance.dto.PasswordResetToken;
 import utp.integrador.avance.dto.UserDTO;
@@ -64,10 +65,11 @@ public class LoginController {
 
     @PostMapping("/forgotPassword")
     public String forgotPassordProcess(@ModelAttribute UserDTO userDTO) {
+        String homeURL = ServletUriComponentsBuilder.fromCurrentContextPath().toUriString();
         String output = "";
         Usuario user = userService.getUsuario(userDTO.getEmail()).get();
         if (user != null) {
-            output = userDetailsService.sendEmail(user);
+            output = userDetailsService.sendEmail(user,homeURL);
         }
         if (output.equals("success")) {
             return "redirect:/forgotPassword?success";

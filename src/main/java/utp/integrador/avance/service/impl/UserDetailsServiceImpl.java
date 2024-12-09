@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import utp.integrador.avance.dao.TokenRepository;
 import utp.integrador.avance.dao.UserRepository;
 import utp.integrador.avance.dto.PasswordResetToken;
@@ -53,17 +54,17 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
 
-    public String sendEmail(Usuario user) {
+    public String sendEmail(Usuario user, String host) {
         try {
-            String resetLink = generateResetToken(user);
+            String resetLink = generateResetToken(user,host);
 
             SimpleMailMessage msg = new SimpleMailMessage();
-            msg.setFrom("joseprbsgml@gmail.com");
+            msg.setFrom("bancodecomidaperuci2@gmail.com");
             msg.setTo(user.getEmail());
 
             msg.setSubject("Recuperacion de Contrasena");
-            msg.setText("Please click on this link to Reset your Password :" + resetLink + ". \n\n"
-                    + "Saludos \n" + "ABC");
+            msg.setText("Ingrese este link en el navegador : " + resetLink + ". \n\n"
+                    + "Saludos \n" + "Banco de Alimentos del Peru");
 
             javaMailSender.send(msg);
 
@@ -76,7 +77,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
 
-    public String generateResetToken(Usuario user) {
+    public String generateResetToken(Usuario user,String host) {
         UUID uuid = UUID.randomUUID();
         LocalDateTime currentDateTime = LocalDateTime.now();
         LocalDateTime expiryDateTime = currentDateTime.plusMinutes(30);
@@ -87,7 +88,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         resetToken.setUser(user);
         PasswordResetToken token = tokenRepository.save(resetToken);
         if (token != null) {
-            String endpointUrl = "http://localhost:8080/resetPassword";
+            String endpointUrl = host.concat("/resetPassword");
             return endpointUrl + "/" + resetToken.getToken();
         }
         return "";
