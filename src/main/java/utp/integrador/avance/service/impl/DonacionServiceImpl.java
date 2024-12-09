@@ -73,7 +73,7 @@ public class DonacionServiceImpl implements DonacionService {
             HistoricoDonacion h = new HistoricoDonacion();
             h.setDonMonetaria(d);
             h.setFecha_uso(LocalDate.now());
-            h.setCantidad(String.valueOf(request.getCantidad()));
+            h.setCantidad("-".concat(String.valueOf(request.getCantidad())));
             historicoDonacionRepository.save(h);
         } else {
             log.warn("Request modificado: {} - {}",request.getProductId(),request.getCantidad());

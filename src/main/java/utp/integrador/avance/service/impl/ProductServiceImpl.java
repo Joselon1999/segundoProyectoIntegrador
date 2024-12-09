@@ -57,7 +57,7 @@ public class ProductServiceImpl implements ProductService {
         HistoricoAlimentaria h = new HistoricoAlimentaria();
         h.setProducto(p);
         h.setFecha_uso(LocalDate.now());
-        h.setCantidad(String.valueOf(producto.getCantidad()));
+        h.setCantidad("-".concat(String.valueOf(producto.getCantidad())));
         historicoAlimentariaRepository.save(h);
         return p;
     }
