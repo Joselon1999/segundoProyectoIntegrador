@@ -1,5 +1,6 @@
 package utp.integrador.avance.service.impl;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -8,16 +9,16 @@ import utp.integrador.avance.dao.DonMonetariaRepository;
 import utp.integrador.avance.dao.DonacionRepository;
 import utp.integrador.avance.dao.DonanteRepository;
 import utp.integrador.avance.dao.UserRepository;
-import utp.integrador.avance.model.DonMonetaria;
-import utp.integrador.avance.model.Donacion;
-import utp.integrador.avance.model.Donador;
-import utp.integrador.avance.model.Usuario;
+import utp.integrador.avance.dto.UseDonacionRequest;
+import utp.integrador.avance.model.*;
 import utp.integrador.avance.service.DonacionService;
 
 import java.time.LocalDate;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
+@Slf4j
 public class DonacionServiceImpl implements DonacionService {
 
     @Autowired
@@ -49,5 +50,25 @@ public class DonacionServiceImpl implements DonacionService {
         donacionRepository.save(donacion);
         donMonetariaRepository.save(donMonetaria);
         return donMonetaria;
+    }
+
+    @Override
+    public Optional<DonMonetaria> getDonacion(Long id) {
+        return donMonetariaRepository.findById(id);
+    }
+
+    @Override
+    public DonMonetaria usarDonacion(UseDonacionRequest request) {
+        Optional<DonMonetaria> producto = donMonetariaRepository.findById(request.getProductId());
+        DonMonetaria d = new DonMonetaria();
+
+        if (producto.isPresent()) {
+            d = producto.get();
+            d.setMontoDonacion(d.getMontoDonacion().subtract(request.getCantidad()));
+            donMonetariaRepository.save(d);
+        } else {
+            log.warn("Request modificado: {} - {}",request.getProductId(),request.getCantidad());
+        }
+        return d;
     }
 }

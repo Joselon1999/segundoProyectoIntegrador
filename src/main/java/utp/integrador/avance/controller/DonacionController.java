@@ -7,11 +7,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import utp.integrador.avance.dto.UseDonacionRequest;
+import utp.integrador.avance.dto.UseProductRequest;
 import utp.integrador.avance.model.DonMonetaria;
+import utp.integrador.avance.model.Producto;
 import utp.integrador.avance.service.DonacionService;
 
 import java.util.List;
@@ -50,6 +50,33 @@ public class DonacionController {
             return "createDonacion";
         }
         donacionService.createDonacion(donMonetaria);
+        return "redirect:/helper/gestion-donacion";
+    }
+
+    @GetMapping("/helper/gestion-donacion/{id}/usar")
+    public String usarDonacion(@PathVariable Long id, Model model) {
+        UseDonacionRequest request = new UseDonacionRequest();
+        request.setProductId(id);
+
+        model.addAttribute("donacion", donacionService.getDonacion(id));
+        model.addAttribute("request", request);
+        return "usarDonacion";
+    }
+
+    @PostMapping("/helper/gestion-donacion/usar")
+    public String registrarUsoDonacion(@ModelAttribute("request") UseDonacionRequest request,
+                                       BindingResult bindingResult,
+                                       Model model) {
+        DonMonetaria donMonetaria = donacionService.getDonacion(request.getProductId())
+                .orElseThrow(() -> new IllegalArgumentException("Donacion no encontrado"));
+
+        if (request.getCantidad().compareTo(donMonetaria.getMontoDonacion()) > 0) {
+            model.addAttribute("donacion", donacionService.getDonacion(request.getProductId()));
+            model.addAttribute("request", request);
+            model.addAttribute("mensaje", "La cantidad solicitada supera al monto disponible.");
+            return "usarDonacion";
+        }
+        donacionService.usarDonacion(request);
         return "redirect:/helper/gestion-donacion";
     }
 }
