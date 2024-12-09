@@ -4,6 +4,11 @@ import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,8 +16,11 @@ import org.springframework.web.bind.annotation.*;
 import utp.integrador.avance.dao.DonanteRepository;
 import utp.integrador.avance.dto.UseProductRequest;
 import utp.integrador.avance.model.Producto;
+import utp.integrador.avance.model.Usuario;
 import utp.integrador.avance.service.CategoryService;
 import utp.integrador.avance.service.ProductService;
+import utp.integrador.avance.service.UserService;
+import utp.integrador.avance.service.session.IAuthenticationFacade;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +39,12 @@ public class ProductController {
 
     @Autowired
     private DonanteRepository donanteRepository;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private IAuthenticationFacade authenticationFacade;
 
     @GetMapping("/helper/gestion-productos")
     public String gestionProductos(@RequestParam(defaultValue = "1") int pagina,
@@ -66,6 +80,9 @@ public class ProductController {
     public String registrarAlimento(@Valid @ModelAttribute("alimento") Producto producto,
                               BindingResult bindingResult,
                               Model model) {
+        Usuario u = userService.getUsuario(authenticationFacade.getAuthentication().getName()).get();
+        producto.setUsuario(u);
+        producto.setEstado_producto("Activo");
         if (bindingResult.hasErrors()) {
             model.addAttribute("alimento", new Producto());
             model.addAttribute("donantes", donanteRepository.findAll());
