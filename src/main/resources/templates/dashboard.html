@@ -51,7 +51,8 @@
 
         <!-- Gestión Donadores -->
         <div class="col-md-4">
-            <div class="card text-center p-3 border-0 shadow" th:onclick="'/gestion-donadores'">
+            <div class="card text-center p-3 border-0 shadow" th:onclick="'/helper/gestion-donacion'">
+                <a th:href="@{/helper/gestion-donacion}">
                 <img th:src="@{/imagenes/d4.avif}" alt="Gestión Donadores"/>
                 <div class="card-body">
                     <h5 class="card-title">Gestión Donadores</h5>

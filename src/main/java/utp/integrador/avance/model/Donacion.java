@@ -21,14 +21,11 @@ public class Donacion {
     @GeneratedValue(strategy = IDENTITY )
     private Long idDonacion;
 
-    private int idUsuario;
-    private int idDonador;
+    @ManyToOne
+    private Usuario usuario;
+
+    @ManyToOne
+    private Donador donador;
     private LocalDate fechaDonacion;
     private int tipoDonacion;
-
-    @OneToMany(mappedBy = "donacion")
-    private Set<DonAlimentaria> donacionesAlimentarias;
-
-    @OneToMany(mappedBy = "donacion")
-    private Set<DonMonetaria> donacionesMonetarias;
 }

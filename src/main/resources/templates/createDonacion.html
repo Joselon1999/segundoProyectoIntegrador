@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Registro de Alimentos</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
+  <link href="../static/css/create.css" th:href="@{/css/create.css}"  type="text/css"  rel="stylesheet">
+</head>
+<body>
+<div class="form-container">
+  <form action="#" th:action="@{/admin/gestion-donacion/nuevo}" th:object="${donacion}" method="POST">
+    <!-- Campo de Descripción -->
+    <div class="mb-3">
+      <label for="descripcion" class="form-label">Descripción</label>
+      <input type="text" class="form-control" id="descripcion" name="descripcion" th:field="*{descDonMonetaria}" placeholder="Ingresa la descripción" required>
+    </div>
+
+    <!-- Campo de Cantidad -->
+    <div class="mb-3">
+      <label for="montoDonacion" class="form-label">Cantidad</label>
+      <input type="number" class="form-control" id="montoDonacion" name="montoDonacion" th:field="*{montoDonacion}" placeholder="Ingresa la cantidad" required>
+      <div class="text-danger" th:if="${#fields.hasErrors('montoDonacion')}" th:errors="*{montoDonacion}"></div>
+    </div>
+
+    <!-- Campo de Donante -->
+    <!--<div class="mb-3">
+      <label for="donante" class="form-label">Donante</label>
+      <select class="form-select" id="donante" name="donante" th:field="*{donante}" required>
+        <option value="" disabled selected>Selecciona un donante</option>
+        <option th:each="donante : ${donantes}" th:value="${donante}" th:text="${donante}"></option>
+      </select>
+    </div>-->
+
+    <!-- Botones -->
+    <div class="d-flex justify-content-between">
+      <button type="submit" class="btn btn-guardar">Guardar</button>
+      <a href="/helper/gestion-donacion" class="btn btn-cancelar">Cancelar</a>
+    </div>
+  </form>
+</div>
+</body>
+</html>

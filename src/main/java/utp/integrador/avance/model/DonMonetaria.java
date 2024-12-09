@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Entity
@@ -23,5 +25,7 @@ public class DonMonetaria {
     private Donacion donacion;
 
     private String descDonMonetaria;
-    private double montoDonacion;
+
+    @Column(precision = 20, scale = 2)
+    private BigDecimal montoDonacion;
 }
