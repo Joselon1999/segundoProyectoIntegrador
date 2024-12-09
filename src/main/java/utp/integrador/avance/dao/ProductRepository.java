@@ -12,7 +12,7 @@ public interface ProductRepository extends JpaRepository<Producto,Long> {
 
     Page<Producto> findAllByOrderByFechaVencimientoAsc(PageRequest e);
 
-    @Query("SELECT p FROM Producto p WHERE p.cantidad > 0.0 ORDER BY p.fechaVencimiento ASC")
+    @Query("SELECT p FROM Producto p WHERE p.cantidad > 0.0 AND p.estado_producto = 'true'  ORDER BY p.fechaVencimiento ASC")
     Page<Producto> findProductosConStock(Double cantidad,PageRequest e);
 
     Page<Producto> findByCategoriaIdOrderByFechaVencimientoAsc(Long categoriaId,PageRequest e);
@@ -20,6 +20,7 @@ public interface ProductRepository extends JpaRepository<Producto,Long> {
     @Query("SELECT p FROM Producto p " +
             "WHERE p.categoria.id = :categoriaId " +
             "AND p.cantidad > :cantidad " +
+            "AND p.estado_producto = 'true' " +
             "ORDER BY p.fechaVencimiento ASC")
     Page<Producto> findProductosSinStock(@Param("categoriaId") Long categoriaId, @Param("cantidad") Double cantidad, Pageable pageable);
 }

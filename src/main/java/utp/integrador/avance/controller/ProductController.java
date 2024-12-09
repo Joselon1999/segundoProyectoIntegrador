@@ -22,7 +22,10 @@ import utp.integrador.avance.service.ProductService;
 import utp.integrador.avance.service.UserService;
 import utp.integrador.avance.service.session.IAuthenticationFacade;
 
+import java.text.SimpleDateFormat;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -82,7 +85,7 @@ public class ProductController {
                               Model model) {
         Usuario u = userService.getUsuario(authenticationFacade.getAuthentication().getName()).get();
         producto.setUsuario(u);
-        producto.setEstado_producto("Activo");
+        producto.setEstado_producto("true");
         if (bindingResult.hasErrors()) {
             model.addAttribute("alimento", new Producto());
             model.addAttribute("donantes", donanteRepository.findAll());
@@ -126,7 +129,13 @@ public class ProductController {
         Producto producto = productService.getProducto(id).get();
         UseProductRequest request = new UseProductRequest();
         request.setProductId(id);
+
+        Date date = Date.from(producto.getFechaVencimiento().atStartOfDay(ZoneId.systemDefault()).toInstant());
+
         request.setFechaVencimiento(producto.getFechaVencimiento());
+        request.setCantidad(producto.getCantidad());
+        request.setEnabled(producto.getEstado_producto().equals("true"));
+
 
         model.addAttribute("product", producto);
         model.addAttribute("request", request);

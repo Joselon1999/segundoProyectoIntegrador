@@ -17,6 +17,7 @@ import utp.integrador.avance.model.Usuario;
 import utp.integrador.avance.service.ProductService;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Optional;
 
 @Service
@@ -101,7 +102,10 @@ public class ProductServiceImpl implements ProductService {
 
         if (producto.isPresent()) {
             p = producto.get();
-            p.setCantidad((double) request.getCantidad());
+            if (!request.getEnabled()) {
+                p.setEstado_producto(String.valueOf(request.getEnabled()));
+            }
+            p.setCantidad(request.getCantidad());
             p.setFechaVencimiento(request.getFechaVencimiento());
             productRepository.save(p);
         } else {

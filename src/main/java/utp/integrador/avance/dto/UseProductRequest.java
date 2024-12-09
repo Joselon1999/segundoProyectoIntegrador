@@ -3,6 +3,7 @@ package utp.integrador.avance.dto;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -12,6 +13,7 @@ import java.time.LocalDate;
 public class UseProductRequest {
 
     private Long productId;
-    private int cantidad;
+    private Double cantidad;
+    private Boolean enabled;
     private LocalDate fechaVencimiento;
 }

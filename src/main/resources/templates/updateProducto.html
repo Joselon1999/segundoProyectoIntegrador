@@ -20,11 +20,15 @@
             <div th:if="${#fields.hasErrors('cantidad')}" style="color: red;">
                 <p th:errors="*{cantidad}">La cantidad no es válida.</p>
             </div>
-
+            <!-- Checkbox para habilitado/deshabilitado -->
+            <div class="form-check mb-3">
+                <input type="checkbox" id="enabled" th:field="*{enabled}" class="form-check-input" />
+                <label for="enabled" class="form-check-label">¿Usuario habilitado?</label>
+            </div>
             <div class="mb-3">
                 <label for="fechaVencimiento" class="form-label">Fecha de Vencimiento:</label>
                 <input type="date" id="fechaVencimiento" name="fechaVencimiento" class="form-control"
-                       th:field="*{fechaVencimiento}" th:value="${request.fechaVencimiento}" required>
+                       th:field="*{fechaVencimiento}" required>
             </div>
 
             <div class="text-center">
