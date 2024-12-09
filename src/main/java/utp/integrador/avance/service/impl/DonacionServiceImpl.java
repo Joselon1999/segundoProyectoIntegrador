@@ -5,10 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-import utp.integrador.avance.dao.DonMonetariaRepository;
-import utp.integrador.avance.dao.DonacionRepository;
-import utp.integrador.avance.dao.DonanteRepository;
-import utp.integrador.avance.dao.UserRepository;
+import utp.integrador.avance.dao.*;
 import utp.integrador.avance.dto.UseDonacionRequest;
 import utp.integrador.avance.model.*;
 import utp.integrador.avance.service.DonacionService;
@@ -34,6 +31,9 @@ public class DonacionServiceImpl implements DonacionService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private HistoricoDonacionRepository historicoDonacionRepository;
+
     @Override
     public Page<DonMonetaria> listarDonacion(int pagina, int tamanio) {
         return donMonetariaRepository.findByMontoDonacionGreaterThan(
@@ -45,7 +45,14 @@ public class DonacionServiceImpl implements DonacionService {
         donMonetaria.setDonador(donanteRepository.findById(donMonetaria.getDonador().getId_donador()).orElse(new Donador()));
         donMonetaria.setUsuario(userRepository.findById(donMonetaria.getDonador().getId_donador()).orElse(new Usuario()));
         donMonetaria.setFechaDonacion(LocalDate.now());
-        return donMonetariaRepository.save(donMonetaria);
+        DonMonetaria d = donMonetariaRepository.save(donMonetaria);
+
+        HistoricoDonacion h = new HistoricoDonacion();
+        h.setDonMonetaria(d);
+        h.setFecha_uso(LocalDate.now());
+        h.setCantidad(String.valueOf(donMonetaria.getMontoDonacion()));
+        historicoDonacionRepository.save(h);
+        return d;
     }
 
     @Override
@@ -62,6 +69,12 @@ public class DonacionServiceImpl implements DonacionService {
             d = producto.get();
             d.setMontoDonacion(d.getMontoDonacion().subtract(request.getCantidad()));
             donMonetariaRepository.save(d);
+
+            HistoricoDonacion h = new HistoricoDonacion();
+            h.setDonMonetaria(d);
+            h.setFecha_uso(LocalDate.now());
+            h.setCantidad(String.valueOf(request.getCantidad()));
+            historicoDonacionRepository.save(h);
         } else {
             log.warn("Request modificado: {} - {}",request.getProductId(),request.getCantidad());
         }

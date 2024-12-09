@@ -13,7 +13,10 @@ import utp.integrador.avance.dto.UseDonacionRequest;
 import utp.integrador.avance.dto.UseProductRequest;
 import utp.integrador.avance.model.DonMonetaria;
 import utp.integrador.avance.model.Producto;
+import utp.integrador.avance.model.Usuario;
 import utp.integrador.avance.service.DonacionService;
+import utp.integrador.avance.service.UserService;
+import utp.integrador.avance.service.session.IAuthenticationFacade;
 
 import java.util.List;
 
@@ -27,6 +30,11 @@ public class DonacionController {
     @Autowired
     private DonanteRepository donanteRepository;
 
+    @Autowired
+    private IAuthenticationFacade authenticationFacade;
+
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/helper/gestion-donacion")
     public String gestionDonacion(@RequestParam(defaultValue = "1") int pagina,
@@ -51,6 +59,8 @@ public class DonacionController {
     public String registrarAlimento(@Valid @ModelAttribute("donacion") DonMonetaria donMonetaria,
                                     BindingResult bindingResult,
                                     Model model) {
+        Usuario u = userService.getUsuario(authenticationFacade.getAuthentication().getName()).get();
+        donMonetaria.setUsuario(u);
         if (bindingResult.hasErrors()) {
             model.addAttribute("donacion", new DonMonetaria());
             model.addAttribute("donantes", donanteRepository.findAll());
