@@ -27,7 +27,7 @@
       <label for="donador" class="form-label">Donador</label>
       <select class="form-select" id="donador" name="donador" th:field="*{donador}" required>
         <option value="" disabled selected>Selecciona un donador</option>
-        <option th:each="donador : ${donantes}" th:value="${donador}" th:text="${donador.nombre}"></option>
+        <option th:each="donador : ${donantes}" th:value="${donador.id_donador}" th:text="${donador.nombre}"></option>
       </select>
     </div>
 
