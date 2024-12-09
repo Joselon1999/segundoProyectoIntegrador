@@ -22,20 +22,20 @@
       <div class="text-danger" th:if="${#fields.hasErrors('cantidad')}" th:errors="*{cantidad}"></div>
     </div>
 
-    <!-- Campo de Donante -->
-    <!--<div class="mb-3">
-      <label for="donante" class="form-label">Donante</label>
-      <select class="form-select" id="donante" name="donante" th:field="*{donante}" required>
-        <option value="" disabled selected>Selecciona un donante</option>
-        <option th:each="donante : ${donantes}" th:value="${donante}" th:text="${donante}"></option>
+    <!-- Campo de donador -->
+    <div class="mb-3">
+      <label for="donador" class="form-label">Donador</label>
+      <select class="form-select" id="donador" name="donador" th:field="*{donador}" required>
+        <option value="" disabled selected>Selecciona un donador</option>
+        <option th:each="donador : ${donantes}" th:value="${donador.id_donador}" th:text="${donador.nombre}"></option>
       </select>
-    </div>-->
+    </div>
 
     <div class="mb-3">
       <label for="categoria" class="form-label">Categoria</label>
-      <select class="form-select" id="categoria" name="donante" th:field="*{categoria}" required>
+      <select class="form-select" id="categoria" name="categoria" th:field="*{categoria}" required>
         <option value="" disabled selected>Selecciona una categoria</option>
-        <option th:each="categoria : ${categorias}" th:value="${categoria.id_categoria}" th:text="${categoria.nombre}"></option>
+        <option th:each="categoria : ${categorias}" th:value="${categoria.id}" th:text="${categoria.nombre}"></option>
       </select>
       <div th:if="${#fields.hasErrors('categoria')}" th:errors="*{categoria}"></div>
     </div>

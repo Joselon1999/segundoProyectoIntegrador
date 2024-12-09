@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import utp.integrador.avance.dao.DonanteRepository;
 import utp.integrador.avance.dto.UseProductRequest;
 import utp.integrador.avance.model.Producto;
 import utp.integrador.avance.service.CategoryService;
@@ -27,6 +28,9 @@ public class ProductController {
 
     @Autowired
     private CategoryService categoryService;
+
+    @Autowired
+    private DonanteRepository donanteRepository;
 
     @GetMapping("/helper/gestion-productos")
     public String gestionProductos(@RequestParam(defaultValue = "1") int pagina,
@@ -53,7 +57,7 @@ public class ProductController {
     @GetMapping("/admin/gestion-productos/alimentos/nuevo")
     public String mostrarFormulario(Model model) {
         model.addAttribute("alimento", new Producto());
-        model.addAttribute("donantes", List.of("Donante 1", "Donante 2", "Donante 3"));
+        model.addAttribute("donantes", donanteRepository.findAll());
         model.addAttribute("categorias", categoryService.listCategoria());
         return "createProducto";
     }
@@ -64,7 +68,7 @@ public class ProductController {
                               Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("alimento", new Producto());
-            model.addAttribute("donantes", List.of("Donante 1", "Donante 2", "Donante 3"));
+            model.addAttribute("donantes", donanteRepository.findAll());
             model.addAttribute("categorias", categoryService.listCategoria());
             return "createProducto";
         }
