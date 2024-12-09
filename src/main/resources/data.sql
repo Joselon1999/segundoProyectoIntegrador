@@ -40,9 +40,10 @@ VALUES
 
 INSERT INTO DONADOR (nombre)
 VALUES
-    ('Tio Alberto');
+    ('Luis caceres'),
+    ('Jose Morales');
 
 INSERT INTO DON_MONETARIA (DESC_DON_MONETARIA,MONTO_DONACION,FECHA_DONACION,DONADOR_ID_DONADOR,USUARIO_ID_USUARIO)
 VALUES
 ('Donacion personal Jose',2000.00,'2024-12-01',1,1),
-('Riñon de Piero',12000.00,'2024-12-01',1,1);
+('Donacion personal Piero',12000.00,'2024-12-01',1,1);
