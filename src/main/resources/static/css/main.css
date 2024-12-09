@@ -7,6 +7,11 @@
     color: #000;
     border: none;
 }
+.btn-volver {
+    background-color: #0753ff;
+    color: #000;
+    border: none;
+}
 .btn-update {
     background-color: #665CF7;
     color: #ffffff;

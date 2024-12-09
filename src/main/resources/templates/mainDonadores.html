@@ -3,34 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gestión de Alimentos</title>
+  <title>Gestión de Donaciones</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
   <link href="../static/css/main.css" th:href="@{/css/main.css}"  type="text/css"  rel="stylesheet">
 </head>
 <body>
-<div>
-  <button class="btn btn-primary">
-    <a th:href="@{/dashboard}">Volver</a></button>
-</div>
 <div class="container mt-5">
+  <div>
+    <button class="btn btn-primary">
+      <a th:href="@{/dashboard}">Volver</a></button>
+  </div>
   <!-- Encabezado -->
   <div class="d-flex justify-content-between align-items-center mb-4">
     <div>
-      <h1>Usuarios</h1>
-      <p class="text-muted">Ordenado por fecha de registro</p>
+      <h1>Donaciones</h1>
     </div>
-    <button class="btn btn-register"><a th:href="@{/admin/gestion-usuarios/usuario/nuevo}">Registrar nuevo usuario</a></button>
+    <button class="btn btn-register"><a th:href="@{/helper/gestion-donador/nuevo}">Registrar nuevo ingreso</a></button>
   </div>
-
-  <!-- Lista de alimentos -->
+  <div class="mb-4">
+  </div>
+  <!-- Lista de donaciones -->
   <div class="list-group">
-    <div class="list-group-item p-3 food-item" th:each="usuario : ${usuarios}">
+    <div class="list-group-item p-3 food-item" th:each="donador : ${donadores}">
       <div class="d-flex align-items-center">
+        <img th:src="@{/imagenes/d6.png}"  alt="Imagen de donacion" class="me-3"/>
         <div>
-          <h5 th:text="${usuario.username}">Nombre del Alimento</h5>
-          <button class="btn btn-update">
-            <a class="a-update" th:href="@{/admin/gestion-usuarios/{id}/actualizar(id = ${usuario.email})}">Usar</a>
-          </button>
+          <h5 th:text="${donador.nombre}">Nombre</h5>
         </div>
       </div>
     </div>
