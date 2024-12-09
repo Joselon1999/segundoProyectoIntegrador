@@ -42,16 +42,10 @@ public class DonacionServiceImpl implements DonacionService {
 
     @Override
     public DonMonetaria createDonacion(DonMonetaria donMonetaria) {
-        Donacion donacion = new Donacion();
-        donacion.setDonador(donanteRepository.findById(1L).orElse(new Donador()));
-        donacion.setUsuario(userRepository.findById(1L).orElse(new Usuario()));
-        donacion.setTipoDonacion(1);
-        donacion.setFechaDonacion(LocalDate.now());
-        donMonetaria.setDonacion(donacion);
-
-        donacionRepository.save(donacion);
-        donMonetariaRepository.save(donMonetaria);
-        return donMonetaria;
+        donMonetaria.setDonador(donanteRepository.findById(donMonetaria.getDonador().getId_donador()).orElse(new Donador()));
+        donMonetaria.setUsuario(userRepository.findById(donMonetaria.getDonador().getId_donador()).orElse(new Usuario()));
+        donMonetaria.setFechaDonacion(LocalDate.now());
+        return donMonetariaRepository.save(donMonetaria);
     }
 
     @Override

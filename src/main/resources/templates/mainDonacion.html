@@ -29,6 +29,9 @@
           <p class="mb-1 text-muted" th:text="'Cantidad: '+ ${donacion.montoDonacion}">
             Cantidad desconocida.
           </p>
+          <p class="mb-1 text-muted" th:text="'Donador: '+ ${donacion.donador.nombre}">
+            Cantidad desconocida.
+          </p>
           <button class="btn btn-register"><a th:href="@{/helper/gestion-donacion/{id}/usar(id = ${donacion.idDonMonetaria})}">Usar</a></button>
         </div>
       </div>

@@ -19,7 +19,7 @@
     <div class="row g-4">
         <!-- Gestión Usuarios -->
         <div class="col-md-4">
-            <div class="card text-center p-3 border-0 shadow" th:onclick="'/gestion-usuarios'">
+            <div class="card text-center p-3 border-0 shadow" th:onclick="'/admin/gestion-usuarios'">
                 <a th:href="@{/admin/gestion-usuarios}">
                     <img th:src="@{/imagenes/d1.png}" alt="Gestión Usuarios"/>
                 </a>
@@ -30,14 +30,14 @@
         </div>
 
         <!-- Gestión Roles -->
-        <div class="col-md-4">
+        <!--<div class="col-md-4">
             <div class="card text-center p-3 border-0 shadow" th:onclick="'/gestion-roles'">
                 <img th:src="@{/imagenes/d2.png}" alt="Gestión Roles"/>
                 <div class="card-body">
                     <h5 class="card-title">Gestión Roles</h5>
                 </div>
             </div>
-        </div>
+        </div>-->
 
         <!-- Gestión Informes -->
         <div class="col-md-4">
@@ -62,7 +62,7 @@
 
         <!-- Gestión Alimentos -->
         <div class="col-md-4">
-            <div class="card text-center p-3 border-0 shadow" th:onclick="'/gestion-alimentos'">
+            <div class="card text-center p-3 border-0 shadow" th:onclick="'/helper/gestion-productos'">
                 <a th:href="@{/helper/gestion-productos}">
                     <img th:src="@{/imagenes/d5.jpg}" alt="Gestión Alimentos"/>
                 </a>
@@ -74,7 +74,8 @@
 
         <!-- Gestión Otras Donaciones -->
         <div class="col-md-4">
-            <div class="card text-center p-3 border-0 shadow" th:onclick="'/gestion-otras-donaciones'">
+            <div class="card text-center p-3 border-0 shadow" th:onclick="'/helper/gestion-donadores'">
+                <a th:href="@{/helper/gestion-donacion}">
                 <img th:src="@{/imagenes/d6.png}" alt="Gestión Otras Donaciones"/>
                 <div class="card-body">
                     <h5 class="card-title">Gestión Otras Donaciones</h5>

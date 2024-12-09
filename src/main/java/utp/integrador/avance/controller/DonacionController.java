@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import utp.integrador.avance.dao.DonanteRepository;
 import utp.integrador.avance.dto.UseDonacionRequest;
 import utp.integrador.avance.dto.UseProductRequest;
 import utp.integrador.avance.model.DonMonetaria;
@@ -22,6 +23,9 @@ public class DonacionController {
 
     @Autowired
     private DonacionService donacionService;
+
+    @Autowired
+    private DonanteRepository donanteRepository;
 
 
     @GetMapping("/helper/gestion-donacion")
@@ -39,7 +43,7 @@ public class DonacionController {
     @GetMapping("/admin/gestion-donacion/nuevo")
     public String mostrarFormulario(Model model) {
         model.addAttribute("donacion", new DonMonetaria());
-        model.addAttribute("donantes", List.of("Donante 1", "Donante 2", "Donante 3"));
+        model.addAttribute("donantes", donanteRepository.findAll());
         return "createDonacion";
     }
 
@@ -49,7 +53,7 @@ public class DonacionController {
                                     Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("donacion", new DonMonetaria());
-            model.addAttribute("donantes", List.of("Donante 1", "Donante 2", "Donante 3"));
+            model.addAttribute("donantes", donanteRepository.findAll());
             return "createDonacion";
         }
         donacionService.createDonacion(donMonetaria);
@@ -62,6 +66,7 @@ public class DonacionController {
         request.setProductId(id);
 
         model.addAttribute("donacion", donacionService.getDonacion(id));
+        model.addAttribute("donantes", donanteRepository.findAll());
         model.addAttribute("request", request);
         return "usarDonacion";
     }
