@@ -53,3 +53,18 @@ input {
     width: 150px;
     margin-top: 20px;
 }
+.main-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.footer {
+    margin-bottom: 20px;
+}
+.top-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 20px;
+}
