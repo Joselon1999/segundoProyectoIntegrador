@@ -28,8 +28,11 @@ public class DonacionController {
     public String gestionDonacion(@RequestParam(defaultValue = "1") int pagina,
                                    @RequestParam(defaultValue = "5") int tamanio,
                                    Model model) {
+        Page<DonMonetaria> list = donacionService.listarDonacion(pagina,tamanio);
 
-        model.addAttribute("donaciones", donacionService.listarDonacion(pagina,tamanio));
+        model.addAttribute("donaciones", list);
+        model.addAttribute("totalPaginas", list.getTotalPages());
+        model.addAttribute("paginaActual", pagina);
         return "mainDonacion";
     }
 

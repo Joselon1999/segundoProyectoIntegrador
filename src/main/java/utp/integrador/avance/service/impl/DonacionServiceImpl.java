@@ -13,6 +13,7 @@ import utp.integrador.avance.dto.UseDonacionRequest;
 import utp.integrador.avance.model.*;
 import utp.integrador.avance.service.DonacionService;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Optional;
 import java.util.Set;
@@ -35,7 +36,8 @@ public class DonacionServiceImpl implements DonacionService {
 
     @Override
     public Page<DonMonetaria> listarDonacion(int pagina, int tamanio) {
-        return donMonetariaRepository.findAll(PageRequest.of(pagina-1,tamanio));
+        return donMonetariaRepository.findByMontoDonacionGreaterThan(
+                BigDecimal.ZERO,PageRequest.of(pagina-1,tamanio));
     }
 
     @Override
